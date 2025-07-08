@@ -16,9 +16,9 @@ services:
     image: postgres:16
     container_name: postgres-portfolio
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: SuperTajneHaslo
-      POSTGRES_DB: portfolio
+      POSTGRES_USER: ${SPRING_DATASOURCE_USERNAME}
+      POSTGRES_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      POSTGRES_DB: ${SPRING_DATASOURCE_DB_NAME}
     ports:
       - "5433:5432"
     volumes:

@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS public.user_account
     role character varying COLLATE pg_catalog."default" NOT NULL,
     created_timestamp timestamp with time zone NOT NULL,
     modified_timestamp timestamp with time zone NOT NULL,
-                                     CONSTRAINT user_account_pkey PRIMARY KEY (user_id)
+    CONSTRAINT user_account_pkey PRIMARY KEY (user_id),
+    CONSTRAINT unique_username UNIQUE (username)
     )
 
     TABLESPACE pg_default;
