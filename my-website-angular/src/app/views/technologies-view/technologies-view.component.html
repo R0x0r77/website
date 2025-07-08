@@ -1,0 +1,34 @@
+<article class="max-w-3xl mx-auto px-4">
+  <h1 class="text-3xl font-medium mb-6">Technologies</h1>
+  <p class="text-lg mb-4">
+    This application is built using a combination of modern technologies,
+    including:
+  </p>
+  <h2 class="text-xl font-medium mb-2">Frontend Technologies</h2>
+  <ul class="list-disc pl-6 mb-4">
+    @for (tech of technologiesFrontend; track tech.name) {
+    <li class="mb-2">
+      <span class="font-medium">{{ tech.name }}</span
+      >: {{ tech.description }}
+    </li>
+    }
+  </ul>
+  <h2 class="text-xl font-medium mb-2">Backend Technologies</h2>
+  <ul class="list-disc pl-6 mb-4">
+    @for (tech of technologiesBackend; track tech.name) {
+    <li class="mb-2">
+      <span class="font-medium">{{ tech.name }}</span
+      >: {{ tech.description }}
+    </li>
+    }
+  </ul>
+  <h2 class="text-xl font-medium mb-2">Other Technologies</h2>
+  <ul class="list-disc pl-6 mb-4">
+    @for (tech of technologiesOther; track tech.name) {
+    <li class="mb-2">
+      <span class="font-medium">{{ tech.name }}</span
+      >: {{ tech.description }}
+    </li>
+    }
+  </ul>
+</article>

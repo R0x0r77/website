@@ -1,0 +1,80 @@
+<h2 mat-dialog-title>Sign Up</h2>
+<mat-dialog-content class="w-sm">
+  <form class="grid grid-cols-1 gap-2">
+    <!-- username -->
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        [formControl]="usernameFormControl"
+        autocomplete="username"
+      />
+      @if (usernameFormControl.hasError('required')) {
+      <mat-error>Username is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <!-- email -->
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        [formControl]="emailFormControl"
+        [errorStateMatcher]="matcher"
+        placeholder="Ex. pat@example.com"
+        autocomplete="email"
+      />
+      @if (emailFormControl.hasError('email') &&
+      !emailFormControl.hasError('required')) {
+      <mat-error>Please enter a valid email address</mat-error>
+      } @if (emailFormControl.hasError('required')) {
+      <mat-error>Email is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <!-- password -->
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        matInput
+        [formControl]="passwordFormControl"
+        autocomplete="current-password"
+      />
+      @if (passwordFormControl.hasError('required')) {
+      <mat-error>Password is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <!-- first name -->
+    <mat-form-field>
+      <mat-label>First name</mat-label>
+      <input
+        matInput
+        [formControl]="firstNameFormControl"
+        autocomplete="given-name"
+      />
+    </mat-form-field>
+
+    <!-- last name -->
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input
+        matInput
+        [formControl]="lastNameFormControl"
+        autocomplete="family-name"
+      />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="w-[75px]" mat-button cdkFocusInitial mat-dialog-close>
+    Cancel
+  </button>
+  @if (loading()) {
+  <button class="w-[75px]" mat-button><mat-spinner diameter="20" /></button>
+  } @else {
+  <button class="w-[75px]" mat-button (click)="onSubmit()">Sign Up</button>
+  }
+</mat-dialog-actions>

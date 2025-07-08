@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Log In</h2>
+<mat-dialog-content class="w-sm">
+  <form class="grid grid-cols-1 gap-2">
+    <!-- username -->
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        [formControl]="usernameFormControl"
+        autocomplete="username"
+      />
+      @if (usernameFormControl.hasError('required')) {
+      <mat-error>Username is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <!-- password -->
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        matInput
+        [formControl]="passwordFormControl"
+        autocomplete="current-password"
+      />
+      @if (passwordFormControl.hasError('required')) {
+      <mat-error>Password is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="w-[75px]" mat-button cdkFocusInitial mat-dialog-close>
+    Cancel
+  </button>
+  @if (loading()) {
+  <button class="w-[75px]" mat-button><mat-spinner diameter="20" /></button>
+  } @else {
+  <button class="w-[75px]" mat-button (click)="onSubmit()">Log In</button>
+  }
+</mat-dialog-actions>

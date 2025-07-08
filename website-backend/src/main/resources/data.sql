@@ -1,0 +1,1 @@
+INSERT INTO user_account values(DEFAULT, 'qq', 'qq', '$2a$10$oY9YmLXt6woxGakZUcryGuDbIVanN2t7/Ilrc9j/ikeXAnBLr0YOq', 'qq', 'qq', 'USER', '2024-09-08 12:34:11.771038+02', '2024-09-08 12:34:11.771038+02');

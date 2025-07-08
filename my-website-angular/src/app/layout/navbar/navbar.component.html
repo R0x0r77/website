@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <button class="mr-2" mat-fab>
+    <app-logo-home-button />
+  </button>
+  <button class="mr-2" mat-icon-button (click)="onOpenCloseSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="flex-auto"></span>
+  <button class="mr-2" mat-icon-button (click)="switchDarkMode()">
+    <app-dark-mode-switcher [mode]="mode()" />
+  </button>
+  @if (loggedIn()) {
+  <app-user-avatar-button />
+  } @else {
+  <app-log-in class="mr-2" />
+  <app-sign-up />
+  }
+</mat-toolbar>

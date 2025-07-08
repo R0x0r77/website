@@ -1,0 +1,10 @@
+<app-navbar />
+<mat-sidenav-container class="absolute! top-17 bottom-17 left-0 right-0 w-full">
+  <mat-sidenav class="w-45!" mode="side" [(opened)]="sidenavOpened">
+    <mat-nav-list><app-side-navigation /></mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="box-border border-l-2 border-blue-100 p-8">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<app-footer />

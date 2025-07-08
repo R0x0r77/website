@@ -1,0 +1,34 @@
+@use "tailwindcss";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body.azure-blue {
+  mat-toolbar {
+    & {
+      background-color: #d7e3ff;
+    }
+
+    * {
+      color: #005cbb;
+    }
+  }
+}
+
+body.magenta-violet {
+  mat-toolbar {
+    & {
+      background-color: #810081;
+    }
+
+    * {
+      color: #ffabf3;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<mat-form-field appearance="fill">
+  <mat-label>Theme</mat-label>
+  <mat-select (selectionChange)="onThemeChange($event.value)">
+    @for (theme of themes; track theme.value) {
+    <mat-option [value]="theme.value">
+      {{ theme.name }}
+    </mat-option>
+    }
+  </mat-select>
+</mat-form-field>

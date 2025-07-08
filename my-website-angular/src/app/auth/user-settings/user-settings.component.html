@@ -1,0 +1,54 @@
+<h2 mat-dialog-title>{{ fullName() }}</h2>
+<mat-dialog-content class="w-sm">
+  <form class="grid grid-cols-1 gap-2">
+    <!-- username -->
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        [(ngModel)]="username"
+        [ngModelOptions]="{ standalone: true }"
+        disabled
+      />
+    </mat-form-field>
+
+    <!-- email -->
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        [(ngModel)]="email"
+        [ngModelOptions]="{ standalone: true }"
+        disabled
+      />
+    </mat-form-field>
+
+    <!-- first name -->
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="firstName"
+        [ngModelOptions]="{ standalone: true }"
+        disabled
+      />
+    </mat-form-field>
+
+    <!-- last name -->
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="lastName"
+        [ngModelOptions]="{ standalone: true }"
+        disabled
+      />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="w-[75px]" mat-button cdkFocusInitial mat-dialog-close>
+    Cancel
+  </button>
+  <button class="w-[75px]" mat-button disabled>Save</button>
+</mat-dialog-actions>
