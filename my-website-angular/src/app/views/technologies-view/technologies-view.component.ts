@@ -74,6 +74,11 @@ export class TechnologiesViewComponent {
         'A platform for developing, shipping, and running applications in containers.',
     },
     {
+      name: 'Render',
+      description:
+        'A cloud platform for deploying web applications and services.',
+    },
+    {
       name: 'Git',
       description:
         'A version control system for tracking changes in source code.',
