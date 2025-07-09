@@ -1,4 +1,4 @@
-import { Component, DestroyRef, input, model } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, model } from '@angular/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { RouterOutlet } from '@angular/router';
@@ -30,7 +30,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'my-website-angular';
   sidenavOpened = model(true);
   icons = ['github', 'linkedin'];
@@ -53,5 +53,11 @@ export class AppComponent {
         )
       );
     });
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 50);
   }
 }

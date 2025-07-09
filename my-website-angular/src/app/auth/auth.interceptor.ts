@@ -27,6 +27,15 @@ export function authInterceptor(
 
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
+      if (
+        error.status === 500 &&
+        error.error?.path.includes('/api/users/username')
+      ) {
+        console.log('Hello error in interceptor: ', error);
+        userStore.logOut();
+        refresh = false;
+        return throwError(() => error);
+      }
       if ((error.status === 401 || error.status === 403) && !refresh) {
         refresh = true;
 

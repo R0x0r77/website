@@ -35,7 +35,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/**", "/error", "/api/*.html", "/*.html",
                                 "/", "/index.html",
-                                "/assets/**", "/favicon.ico",
+                                "/assets/**", "/assets/icons/*.svg", "/favicon.ico",
                                 "/*.js", "/*.css", "/*.js", "/*.css", "/*.map",
                                 "/home", "/about", "/cv", "/technologies", "/boardgames", "/riddles")
                         .permitAll()
