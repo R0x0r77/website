@@ -45,7 +45,7 @@ export class RiddleCardComponent {
   onSubmitAnswer() {
     const levelUpDto: LevelUpDto = {
       key: this.currentRiddle()?.key || '',
-      answer: this.answer(),
+      answer: this.answer().toLowerCase(),
       currentLevel: this.userStore.user()?.level || 0,
     };
     this.riddlesService.levelUp(levelUpDto).subscribe({
