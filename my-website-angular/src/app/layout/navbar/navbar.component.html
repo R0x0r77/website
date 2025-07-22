@@ -2,7 +2,12 @@
   <button class="mr-2" mat-fab>
     <app-logo-home-button />
   </button>
-  <button class="mr-2" mat-icon-button (click)="onOpenCloseSidenav()">
+  <button
+    #myMenuButton
+    class="mr-2"
+    mat-icon-button
+    (click)="onOpenCloseSidenav()"
+  >
     <mat-icon>menu</mat-icon>
   </button>
   <span class="flex-auto"></span>

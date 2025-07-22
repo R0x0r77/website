@@ -1,9 +1,12 @@
 import {
   afterNextRender,
+  AfterViewInit,
   Component,
+  ElementRef,
   inject,
   OnInit,
   signal,
+  viewChild,
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,7 +35,10 @@ import { OpenClosePanelService } from '../side-navigation/open-close-panel.servi
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
+  menuButton = viewChild.required('myMenuButton', {
+    read: ElementRef<HTMLButtonElement>,
+  });
   authService = inject(AuthService);
   userStore = inject(UserStore);
   openCloseService = inject(OpenClosePanelService);
@@ -40,24 +46,23 @@ export class NavbarComponent implements OnInit {
   mode = signal<'light' | 'dark'>('light');
   isPanelOpened = false;
 
-  constructor() {
-    afterNextRender(() => {
-      setTimeout(() => {
-        this.onOpenCloseSidenav();
-      }, 300);
-    });
-  }
+  constructor() {}
 
   switchDarkMode() {
     this.mode.set(this.mode() === 'dark' ? 'light' : 'dark');
   }
 
   onOpenCloseSidenav() {
+    console.log('Sidenav toggled');
     this.isPanelOpened = !this.isPanelOpened;
     this.openCloseService.onOpenClose(this.isPanelOpened);
   }
 
   ngOnInit() {
     this.authService.init();
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => this.menuButton().nativeElement.click(), 1000);
   }
 }
