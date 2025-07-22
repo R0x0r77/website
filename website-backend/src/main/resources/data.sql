@@ -1,1 +1,7 @@
-INSERT INTO user_account values(DEFAULT, 'qq', 'qq', '$2a$10$oY9YmLXt6woxGakZUcryGuDbIVanN2t7/Ilrc9j/ikeXAnBLr0YOq', 'qq', 'qq', 'USER', '2024-09-08 12:34:11.771038+02', '2024-09-08 12:34:11.771038+02') ON CONFLICT DO NOTHING;
+INSERT INTO user_account values(DEFAULT, 'qq', 'qq', '$2a$10$oY9YmLXt6woxGakZUcryGuDbIVanN2t7/Ilrc9j/ikeXAnBLr0YOq', 'qq', 'qq', 'USER', '2024-09-08 12:34:11.771038+02', '2024-09-08 12:34:11.771038+02', DEFAULT) ON CONFLICT DO NOTHING;
+INSERT INTO riddle values(1, 'gagged_man', 'silence', 'Name me and so shall you break me.', 2) ON CONFLICT DO NOTHING;
+INSERT INTO riddle values(2, 'water_keeper', 'sponge', 'I have holes throughout, from back to front and top to bottom to core. More nothing than something within, and yet I still hold water.', 6) ON CONFLICT DO NOTHING;
+INSERT INTO riddle values(3, 'titans', 'boots', 'Two brothers we are, great burdens we bear, all day if we are bitterly pressed; yet this will I say - we are full at day, and empty when we go at rest.', 4) ON CONFLICT DO NOTHING;
+INSERT INTO riddle values(4, 'snake', 'message', 'I walk the path with steady steps, Each move is taken twice, no less. The signs you see are but a trace, Unveil the path I once embraced. NESENES', 5) ON CONFLICT DO NOTHING;
+INSERT INTO riddle values(5, 'water-containers', 'ocean', 'Distribute the water so that 5L container and 8L container have 4L of water each and the 3L container is empty. Doing so you will receive the secret answer.', 3) ON CONFLICT DO NOTHING;
+INSERT INTO riddle values(6, 'citadel', 'stronghold', 'Puzzle time! Order all elements correctly to receive the secret answer.', 7) ON CONFLICT DO NOTHING;

@@ -1,0 +1,5 @@
+<mat-grid-list cols="7" rowHeight="1:1">
+  @for (el of gridLetters; track el.id) {
+  <mat-grid-tile class="text-lg">{{ el.letter }}</mat-grid-tile>
+  }
+</mat-grid-list>

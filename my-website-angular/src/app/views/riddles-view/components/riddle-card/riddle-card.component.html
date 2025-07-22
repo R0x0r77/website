@@ -1,0 +1,37 @@
+<mat-card class="p-1 sm:p-4 min-w-52" appearance="outlined">
+  @if (currentRiddle()) {
+  <mat-card-header>
+    <mat-card-title>Riddle {{ userStore.user()?.level }}</mat-card-title>
+  </mat-card-header>
+  }
+  <mat-card-content class="mt-2">
+    <p class="mt-1">{{ currentRiddle()?.description }}</p>
+    @if (currentRiddle()?.levelReward == 5) {
+    <hr class="mt-2 mb-2 sm:mt-4" />
+    <app-snake-riddle />
+    } @else if (currentRiddle()?.levelReward == 3) {
+    <app-water-container-riddle />
+    } @else if (currentRiddle()?.levelReward == 7) {
+    <div class="flex justify-center mt-4 mb-4">
+      <app-castle-riddle />
+    </div>
+    } @if (currentRiddle()) {
+    <mat-form-field class="w-full mt-2">
+      <mat-label>Your Answer</mat-label>
+      <input matInput [(ngModel)]="answer" (keydown.enter)="onSubmitAnswer()" />
+    </mat-form-field>
+    } @else {
+    <p>
+      Congratulations — all riddles lie defeated. But silence is fleeting...
+      more await in the shadows.
+    </p>
+    }
+  </mat-card-content>
+  @if (currentRiddle()) {
+  <mat-card-footer class="m-2 flex justify-end">
+    <button class="w-44" mat-stroked-button (click)="onSubmitAnswer()">
+      Submit Answer
+    </button>
+  </mat-card-footer>
+  }
+</mat-card>

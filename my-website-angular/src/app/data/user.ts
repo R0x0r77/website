@@ -5,6 +5,7 @@ class User {
   firstName: string;
   lastName: string;
   role: string | undefined;
+  level: number;
   createdTimestamp: Date;
   modifiedTimestamp: Date;
   password?: string;
@@ -16,6 +17,7 @@ class User {
     firstName: string,
     lastName: string,
     role: string | undefined,
+    level: number = 1,
     createdTimestamp: Date,
     modifiedTimestamp: Date,
     password?: string
@@ -26,6 +28,7 @@ class User {
     this.firstName = firstName;
     this.lastName = lastName;
     this.role = role;
+    this.level = level;
     this.createdTimestamp = createdTimestamp;
     this.modifiedTimestamp = modifiedTimestamp;
     this.password = password;

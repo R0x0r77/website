@@ -10,9 +10,9 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthenticationRequest, AuthService } from '../auth.service';
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-log-in-dialog',
@@ -37,24 +37,8 @@ export class LogInDialogComponent {
   constructor(
     private authService: AuthService,
     public dialogRef: MatDialogRef<LogInDialogComponent>,
-    private snackBar: MatSnackBar
+    private notificationService: NotificationService
   ) {}
-
-  showError(error: Error) {
-    this.snackBar.open('Error: ' + error.message, 'OK', {
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      duration: 15000,
-    });
-  }
-
-  showSuccess(message: string) {
-    this.snackBar.open(message, 'OK', {
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      duration: 3000,
-    });
-  }
 
   onSubmit() {
     this.loading.set(true);
@@ -64,11 +48,11 @@ export class LogInDialogComponent {
     };
     this.authService.logIn(request).subscribe({
       next: () => {
-        this.showSuccess('Logged in successfully');
+        this.notificationService.showSuccess('Logged in successfully');
         this.dialogRef.close();
       },
       error: (error) => {
-        this.showError(error);
+        this.notificationService.showError(error);
         this.loading.set(false);
       },
       complete: () => {

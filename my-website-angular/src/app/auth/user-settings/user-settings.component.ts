@@ -3,6 +3,7 @@ import {
   Component,
   computed,
   inject,
+  OnInit,
   signal,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +13,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UserStore } from '../../../store/user.store';
+import { AuthService, UserUpdateDto } from '../auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-settings',
@@ -23,24 +27,76 @@ import { UserStore } from '../../../store/user.store';
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatIconModule,
   ],
   templateUrl: './user-settings.component.html',
   styleUrl: './user-settings.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserSettingsComponent {
+export class UserSettingsComponent implements OnInit {
   userStore = inject(UserStore);
 
-  constructor(public dialogRef: MatDialogRef<UserSettingsComponent>) {}
+  constructor(
+    public dialogRef: MatDialogRef<UserSettingsComponent>,
+    private authService: AuthService,
+    private snackBar: MatSnackBar
+  ) {}
 
+  userId = signal(this.userStore.user()?.userId);
   username = signal(this.userStore.user()?.username);
   email = signal(this.userStore.user()?.email);
   firstName = signal(this.userStore.user()?.firstName);
   lastName = signal(this.userStore.user()?.lastName);
+  level = signal(this.userStore.user()?.level);
 
-  fullName = computed<string | undefined>(() =>
-    this.firstName()
-      ? `${this.firstName()} ${this.lastName()}`
-      : this.username()
-  );
+  fullName = signal<string | undefined>('');
+
+  accessLevel = computed(() => {
+    if (!this.level()) return 'counter_1';
+    return this.level()! < 10 ? `counter_${this.level()}` : 'workspace_premium';
+  });
+
+  showError(error: Error) {
+    this.snackBar.open('Error: ' + error.message, 'OK', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: 15000,
+    });
+  }
+
+  showSuccess(message: string) {
+    this.snackBar.open(message, 'OK', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: 5000,
+    });
+  }
+
+  onSubmit() {
+    const user: UserUpdateDto = {
+      userId: this.userId()!,
+      username: this.username()!,
+      email: this.email()!,
+      firstName: this.firstName(),
+      lastName: this.lastName(),
+    };
+
+    this.authService.modify(user).subscribe({
+      next: () => {
+        this.showSuccess('Data updated successfully');
+        this.dialogRef.close();
+      },
+      error: (error) => {
+        this.showError(error);
+      },
+    });
+  }
+
+  ngOnInit() {
+    this.fullName.set(
+      this.firstName()
+        ? `${this.firstName()} ${this.lastName()}`
+        : this.username()
+    );
+  }
 }

@@ -1,0 +1,62 @@
+import { Component, inject, input, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {
+  LevelUpDto,
+  RiddleQuestion,
+  RiddlesService,
+} from '../../services/riddles.service';
+import { NotificationService } from '../../../../shared/services/notification.service';
+import { UserStore } from '../../../../../store/user.store';
+import { SnakeRiddleComponent } from '../complicated-riddles/snake-riddle/snake-riddle.component';
+import { WaterContainerRiddleComponent } from '../complicated-riddles/water-container-riddle/water-container-riddle.component';
+import { CastleRiddleComponent } from '../complicated-riddles/castle-riddle/castle-riddle.component';
+
+@Component({
+  selector: 'app-riddle-card',
+  imports: [
+    FormsModule,
+    MatCardModule,
+    MatChipsModule,
+    MatProgressBarModule,
+    MatInputModule,
+    MatButtonModule,
+    SnakeRiddleComponent,
+    WaterContainerRiddleComponent,
+    CastleRiddleComponent,
+  ],
+  templateUrl: './riddle-card.component.html',
+  styleUrl: './riddle-card.component.scss',
+})
+export class RiddleCardComponent {
+  currentRiddle = input<RiddleQuestion | undefined>();
+  userStore = inject(UserStore);
+  answer = signal<string>('');
+
+  constructor(
+    private riddlesService: RiddlesService,
+    private notificationService: NotificationService
+  ) {}
+
+  onSubmitAnswer() {
+    const levelUpDto: LevelUpDto = {
+      key: this.currentRiddle()?.key || '',
+      answer: this.answer(),
+      currentLevel: this.userStore.user()?.level || 0,
+    };
+    this.riddlesService.levelUp(levelUpDto).subscribe({
+      next: (res) => {
+        this.notificationService.showSuccess('Your answer is correct!');
+        this.userStore.levelUp(res.response);
+        this.answer.set('');
+      },
+      error: (error) => {
+        this.notificationService.showError(error);
+      },
+    });
+  }
+}

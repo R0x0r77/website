@@ -1,0 +1,20 @@
+@if (!solved()) {
+<div
+  cdkDropList
+  cdkDropListOrientation="mixed"
+  class="grid grid-cols-5 gap-[2px] min-w-48 max-w-88"
+  (cdkDropListDropped)="drop($event)"
+>
+  @for (item of items; track item.name) {
+  <img
+    [src]="`assets/images/castle-puzzle/Castle-${item.name}.png`"
+    class="aspect-4/5 cursor-move"
+    cdkDrag
+  />
+  }
+</div>
+} @else {
+<div class="min-w-48 max-w-88">
+  <img src="assets/images/castle-puzzle/Castle.jpg" />
+</div>
+}

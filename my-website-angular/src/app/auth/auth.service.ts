@@ -16,6 +16,14 @@ export interface AuthenticationResponse {
   errorMessage?: string;
 }
 
+export interface UserUpdateDto {
+  userId: number;
+  username: string;
+  firstName?: string;
+  lastName?: string;
+  email: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -55,6 +63,17 @@ export class AuthService {
 
   logOut() {
     this.userStore.logOut();
+  }
+
+  modify(user: UserUpdateDto): Observable<AuthenticationResponse> {
+    return this.http
+      .put<AuthenticationResponse>(`${this.apiUrl}users/${user.userId}`, user)
+      .pipe(
+        tap((res) => {
+          Cookies.set('authToken', res.token, { expires: 1 });
+          this.getUserData(user.username).subscribe();
+        })
+      );
   }
 
   init() {

@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,7 @@ public class AuthenticationService {
                 .lastName(request.getLastName())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
+                .level(1)
                 .build();
         userService.create(user);
         return AuthenticationResponse.builder()
@@ -53,6 +55,22 @@ public class AuthenticationService {
         );
         User user = userService.findByUsername(request.getUsername());
         String jwt = jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwt)
+                .build();
+    }
+
+    @Transactional
+    public AuthenticationResponse refreshAuthentication(User updatedUser) {
+        UsernamePasswordAuthenticationToken authentication =
+                new UsernamePasswordAuthenticationToken(
+                        updatedUser,
+                        updatedUser.getPassword(),
+                        updatedUser.getAuthorities()
+                );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtService.generateToken(updatedUser);
         return AuthenticationResponse.builder()
                 .token(jwt)
                 .build();

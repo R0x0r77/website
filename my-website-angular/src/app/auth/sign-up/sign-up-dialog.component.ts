@@ -11,10 +11,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MyErrorStateMatcher } from '../../shared/input/my-error-state-matcher';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import User from '../../data/user';
 import { AuthService } from '../auth.service';
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-sign-up-dialog',
@@ -46,24 +46,8 @@ export class SignUpDialogComponent {
   constructor(
     private authService: AuthService,
     public dialogRef: MatDialogRef<SignUpDialogComponent>,
-    private snackBar: MatSnackBar
+    private notificationService: NotificationService
   ) {}
-
-  showError(error: Error) {
-    this.snackBar.open('Error: ' + error.message, 'OK', {
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      duration: 15000,
-    });
-  }
-
-  showSuccess(message: string) {
-    this.snackBar.open(message, 'OK', {
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      duration: 5000,
-    });
-  }
 
   createUser() {
     return new User(
@@ -72,6 +56,7 @@ export class SignUpDialogComponent {
       this.emailFormControl.value!,
       this.firstNameFormControl.value!,
       this.lastNameFormControl.value!,
+      undefined,
       undefined,
       new Date(),
       new Date(),
@@ -84,11 +69,11 @@ export class SignUpDialogComponent {
     const user = this.createUser();
     this.authService.signUp(user).subscribe({
       next: () => {
-        this.showSuccess('User signed up successfully');
+        this.notificationService.showSuccess('User signed up successfully');
         this.dialogRef.close();
       },
       error: (error) => {
-        this.showError(error);
+        this.notificationService.showError(error);
         this.loading.set(false);
       },
       complete: () => {

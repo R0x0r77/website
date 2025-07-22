@@ -29,6 +29,13 @@ export const UserStore = signalStore(
       Cookies.set('user', JSON.stringify(modifiedUser), { expires: 1 });
     },
 
+    levelUp(newLevel: number) {
+      const currentUser = store.user();
+      if (!currentUser) return;
+      const updatedUser = { ...currentUser, level: newLevel };
+      patchState(store, { user: updatedUser });
+    },
+
     setLoggedIn(value: boolean) {
       patchState(store, { loggedIn: value });
     },

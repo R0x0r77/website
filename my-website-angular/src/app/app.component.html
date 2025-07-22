@@ -3,7 +3,9 @@
   <mat-sidenav class="w-48!" mode="side" [(opened)]="sidenavOpened">
     <mat-nav-list><app-side-navigation /></mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content class="box-border border-l-2 border-blue-100 py-8 px-4">
+  <mat-sidenav-content
+    class="box-border border-l-2 border-blue-100 px-4 sm:px-8 py-8"
+  >
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

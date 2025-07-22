@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  afterNextRender,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -32,9 +38,15 @@ export class NavbarComponent implements OnInit {
   openCloseService = inject(OpenClosePanelService);
   readonly loggedIn = this.userStore.loggedIn;
   mode = signal<'light' | 'dark'>('light');
-  isPanelOpened = true;
+  isPanelOpened = false;
 
-  constructor() {}
+  constructor() {
+    afterNextRender(() => {
+      setTimeout(() => {
+        this.onOpenCloseSidenav();
+      }, 300);
+    });
+  }
 
   switchDarkMode() {
     this.mode.set(this.mode() === 'dark' ? 'light' : 'dark');

@@ -41,6 +41,8 @@ public class User implements UserDetails {
 
     private Instant modifiedTimestamp;
 
+    private Integer level;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 

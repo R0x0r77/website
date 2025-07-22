@@ -1,4 +1,4 @@
-import { afterNextRender, Component, DestroyRef, model } from '@angular/core';
+import { Component, DestroyRef, model } from '@angular/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { RouterOutlet } from '@angular/router';
@@ -32,7 +32,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AppComponent {
   title = 'my-website-angular';
-  sidenavOpened = model(true);
+  sidenavOpened = model(false);
   icons = ['github', 'linkedin'];
 
   constructor(
@@ -52,10 +52,6 @@ export class AppComponent {
           `assets/icons/${icon}.svg`
         )
       );
-    });
-
-    afterNextRender(() => {
-      window.dispatchEvent(new Event('resize'));
     });
   }
 }

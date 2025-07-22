@@ -23,7 +23,8 @@ export const routes: Routes = [
   },
   {
     path: 'boardgames',
-    component: BoardGamesViewComponent,
+    // component: BoardGamesViewComponent,
+    component: NotFoundComponent,
   },
   {
     path: 'riddles',

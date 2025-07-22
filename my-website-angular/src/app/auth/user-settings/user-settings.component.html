@@ -8,7 +8,6 @@
         matInput
         [(ngModel)]="username"
         [ngModelOptions]="{ standalone: true }"
-        disabled
       />
     </mat-form-field>
 
@@ -19,7 +18,6 @@
         matInput
         [(ngModel)]="email"
         [ngModelOptions]="{ standalone: true }"
-        disabled
       />
     </mat-form-field>
 
@@ -30,7 +28,6 @@
         matInput
         [(ngModel)]="firstName"
         [ngModelOptions]="{ standalone: true }"
-        disabled
       />
     </mat-form-field>
 
@@ -41,14 +38,21 @@
         matInput
         [(ngModel)]="lastName"
         [ngModelOptions]="{ standalone: true }"
-        disabled
       />
     </mat-form-field>
+
+    <!-- level -->
+    <mat-label class="flex items-center gap-4">
+      <span>Access Level:</span>
+      <span class="material-symbols-outlined relative bottom-[2px]">{{
+        accessLevel()
+      }}</span>
+    </mat-label>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button class="w-[75px]" mat-button cdkFocusInitial mat-dialog-close>
     Cancel
   </button>
-  <button class="w-[75px]" mat-button disabled>Save</button>
+  <button class="w-[75px]" mat-button (click)="onSubmit()">Save</button>
 </mat-dialog-actions>

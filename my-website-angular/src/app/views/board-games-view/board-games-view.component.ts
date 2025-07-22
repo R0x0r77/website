@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-board-games-view',
   imports: [],
   templateUrl: './board-games-view.component.html',
-  styleUrl: './board-games-view.component.scss'
+  styleUrl: './board-games-view.component.scss',
 })
-export class BoardGamesViewComponent {
-
-}
+export class BoardGamesViewComponent {}
