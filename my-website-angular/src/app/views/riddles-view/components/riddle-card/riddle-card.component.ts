@@ -43,6 +43,7 @@ export class RiddleCardComponent {
   ) {}
 
   onSubmitAnswer() {
+    if (this.checkNuances()) return;
     const levelUpDto: LevelUpDto = {
       key: this.currentRiddle()?.key || '',
       answer: this.answer().toLowerCase(),
@@ -58,5 +59,20 @@ export class RiddleCardComponent {
         this.notificationService.showError(error);
       },
     });
+  }
+
+  checkNuances(): boolean {
+    if (this.currentRiddle()?.levelReward === 4) {
+      if (this.answer().toLowerCase() === 'shoes') this.answer.set('boots');
+      if (this.answer().toLowerCase() === 'eyes') {
+        this.notificationService.showSuccess(
+          "That answer is good. However, there is a better one, that doesn't have anything to do with eyes. Try again.",
+          20000
+        );
+        // stop submition
+        return true;
+      }
+    }
+    return false;
   }
 }
