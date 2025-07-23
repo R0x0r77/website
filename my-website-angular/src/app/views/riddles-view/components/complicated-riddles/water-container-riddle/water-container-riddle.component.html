@@ -1,6 +1,6 @@
 <div cdkDropListGroup class="container-wrapper p-5 gap-0 sm:gap-6">
   @for (container of containers; track container.name) {
-  <div class="flex flex-col">
+  <div class="flex flex-col items-center">
     <div class="label">
       <strong>{{ container.name }}</strong>
       <div>{{ container.volume }}L / {{ container.capacity }}L</div>
@@ -13,18 +13,31 @@
       [cdkDropListData]="container"
       [cdkDropListEnterPredicate]="isDroppable"
       (cdkDropListDropped)="onDrop($event)"
+      (cdkDropListEntered)="onDropEnter($event)"
+      (cdkDropListExited)="onDropExit()"
     >
+      <!-- Actual water -->
       <div
         class="water"
         cdkDrag
         [cdkDragData]="container"
         [cdkDragDisabled]="container.volume === 0"
         [style.height.%]="(container.volume / container.capacity) * 100"
+        (cdkDragStarted)="onDragStart(container)"
+        (cdkDragEnded)="onDragEnd()"
       >
         <div *cdkDragPreview class="drag-preview-box">
           💧 {{ container.volume }}L
         </div>
       </div>
+
+      <!-- Water preview -->
+      @if (hoveredContainer === container && draggedContainer) {
+      <div
+        class="water-preview"
+        [style.height.%]="calculatePreviewHeight(container)"
+      ></div>
+      }
     </div>
   </div>
   }

@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  DragDropModule,
+  CdkDragEnter,
+  CdkDragExit,
+} from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card';
 import { NotificationService } from '../../../../../shared/services/notification.service';
 
@@ -11,6 +16,7 @@ interface Container {
 
 @Component({
   selector: 'app-water-container-riddle',
+  standalone: true,
   imports: [DragDropModule, MatCardModule],
   templateUrl: './water-container-riddle.component.html',
   styleUrl: './water-container-riddle.component.scss',
@@ -23,6 +29,7 @@ export class WaterContainerRiddleComponent {
   ];
 
   draggedContainer: Container | null = null;
+  hoveredContainer: Container | null = null;
   maxCapacity = Math.max(...this.containers.map((c) => c.capacity));
 
   constructor(private notificationService: NotificationService) {}
@@ -31,6 +38,11 @@ export class WaterContainerRiddleComponent {
     if (container.volume > 0) {
       this.draggedContainer = container;
     }
+  }
+
+  onDragEnd() {
+    this.draggedContainer = null;
+    this.hoveredContainer = null;
   }
 
   onDrop(event: CdkDragDrop<Container>) {
@@ -45,7 +57,18 @@ export class WaterContainerRiddleComponent {
     source.volume -= pourAmount;
     target.volume += pourAmount;
 
+    this.draggedContainer = null;
+    this.hoveredContainer = null;
+
     this.checkWinCondition();
+  }
+
+  onDropEnter(event: CdkDragEnter<Container>) {
+    this.hoveredContainer = event.container.data;
+  }
+
+  onDropExit() {
+    this.hoveredContainer = null;
   }
 
   isDroppable = (_: any, drop: { data: Container }) =>
@@ -53,6 +76,16 @@ export class WaterContainerRiddleComponent {
 
   isDraggable(container: Container) {
     return container.volume > 0;
+  }
+
+  calculatePreviewHeight(container: Container): number {
+    if (!this.draggedContainer || this.draggedContainer === container) return 0;
+
+    const available = container.capacity - container.volume;
+    const pourable = Math.min(this.draggedContainer.volume, available);
+    const futureVolume = container.volume + pourable;
+
+    return (futureVolume / container.capacity) * 100;
   }
 
   checkWinCondition() {

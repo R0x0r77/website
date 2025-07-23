@@ -2,6 +2,7 @@ import {
   afterNextRender,
   AfterViewInit,
   Component,
+  DestroyRef,
   ElementRef,
   inject,
   OnInit,
@@ -19,6 +20,7 @@ import { UserStore } from '../../../store/user.store';
 import { UserAvatarButtonComponent } from '../../auth/user-avatar-button/user-avatar-button.component';
 import { AuthService } from '../../auth/auth.service';
 import { OpenClosePanelService } from '../side-navigation/open-close-panel.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-navbar',
@@ -41,21 +43,26 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   });
   authService = inject(AuthService);
   userStore = inject(UserStore);
-  openCloseService = inject(OpenClosePanelService);
   readonly loggedIn = this.userStore.loggedIn;
   mode = signal<'light' | 'dark'>('light');
-  isPanelOpened = false;
+  isPanelOpened = signal(false);
 
-  constructor() {}
+  constructor(
+    private openClosePanelService: OpenClosePanelService,
+    private destroyRef: DestroyRef
+  ) {
+    this.openClosePanelService.openedClosed$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((value) => this.isPanelOpened.set(value));
+  }
 
   switchDarkMode() {
     this.mode.set(this.mode() === 'dark' ? 'light' : 'dark');
   }
 
   onOpenCloseSidenav() {
-    console.log('Sidenav toggled');
-    this.isPanelOpened = !this.isPanelOpened;
-    this.openCloseService.onOpenClose(this.isPanelOpened);
+    this.isPanelOpened.update((value) => !value);
+    this.openClosePanelService.onOpenClose(this.isPanelOpened());
   }
 
   ngOnInit() {
