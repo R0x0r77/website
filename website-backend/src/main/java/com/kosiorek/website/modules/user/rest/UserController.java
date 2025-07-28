@@ -37,14 +37,14 @@ public class UserController {
     }
 
 
-    // testing
-    @GetMapping("/principal")
-    public String testPrincipal() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//    testing
+//    @GetMapping("/principal")
+//    public String testPrincipal() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        String username = authentication.getName();
-        UserDetails user = (UserDetails) authentication.getPrincipal();
-        return "User: " + user.getUsername() + ", Authorities: " + user.getAuthorities();
-    }
+//        UserDetails user = (UserDetails) authentication.getPrincipal();
+//        return "User: " + user.getUsername() + ", Authorities: " + user.getAuthorities();
+//    }
 
     @GetMapping
     public ResponseEntity<List<User>> getUsers() {

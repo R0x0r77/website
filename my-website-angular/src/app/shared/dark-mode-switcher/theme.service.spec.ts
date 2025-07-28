@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ThemeService } from './theme.service';
+import { ThemeService } from '../dark-mode-switcher/theme.service';
 
 describe('ThemeService', () => {
   let service: ThemeService;

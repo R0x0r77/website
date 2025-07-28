@@ -42,3 +42,45 @@ CREATE TABLE IF NOT EXISTS public.riddle
 
 ALTER TABLE IF EXISTS public.riddle
     OWNER to postgres;
+
+
+-- Table: public.article
+
+-- DROP TABLE IF EXISTS public.article;
+
+CREATE TABLE IF NOT EXISTS public.article
+(
+    article_id integer NOT NULL,
+    title character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    published_date timestamp with time zone NOT NULL,
+                                 markdown_content text COLLATE pg_catalog."default" NOT NULL,
+                                 cover_image_url character varying(255) COLLATE pg_catalog."default",
+    slug character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT article_pkey PRIMARY KEY (article_id),
+    CONSTRAINT unique_slug UNIQUE (slug)
+    )
+
+    TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.article
+    OWNER to postgres;
+
+
+-- Table: public.article_tags
+
+-- DROP TABLE IF EXISTS public.article_tags;
+
+CREATE TABLE IF NOT EXISTS public.article_tags
+(
+    article_article_id integer NOT NULL,
+    tags character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT fk7ca4g2ftit1urmwivh06yqvjd FOREIGN KEY (article_article_id)
+    REFERENCES public.article (article_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    )
+
+    TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.article_tags
+    OWNER to postgres;

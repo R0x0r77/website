@@ -6,32 +6,35 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 })
 export class ThemeService {
   private themeLinkId = 'app-theme';
+  private darkClass = 'dark';
 
-  private themes = [
-    'azure-blue',
-    'cyan-orange',
-    'indigo-pink',
-    'deeppurple-amber',
-    'pink-bluegrey',
-    'purple-green',
-    'magenta-violet',
-    'rose-red',
-  ];
+  private themes = ['azure-blue', 'magenta-violet'];
 
   constructor(private overlay: OverlayContainer) {}
 
-  setTheme(themeName: string) {
-    if (!this.themes.includes(themeName)) {
-      console.warn(`Theme ${themeName} is not recognized.`);
-      return;
-    }
+  isDarkMode(): boolean {
+    return document.documentElement.classList.contains(this.darkClass);
+  }
 
+  enableDarkMode(): void {
+    document.documentElement.classList.add(this.darkClass);
+  }
+
+  disableDarkMode(): void {
+    document.documentElement.classList.remove(this.darkClass);
+  }
+
+  toggleDarkMode(): void {
+    document.documentElement.classList.toggle(this.darkClass);
+  }
+
+  setTheme(themeName: string) {
     const head = document.head;
     const existingLink = document.getElementById(
       this.themeLinkId
     ) as HTMLLinkElement;
 
-    const href = `assets/material-themes/${themeName}.css`;
+    const href = `assets/my-material-themes/${themeName}.css`;
 
     if (existingLink) {
       existingLink.href = href;
@@ -43,15 +46,9 @@ export class ThemeService {
       head.appendChild(linkEl);
     }
 
-    // Update body classes
     document.body.classList.remove(...this.themes);
     document.body.classList.add(themeName);
 
-    // Add mat-typography for proper text colors
-    // document.body.classList.add('mat-typography');
-    // document.body.classList.add('mat-app-background');
-
-    // Also update Angular Material overlay container (dialogs, menus, etc.)
     const containerClassList = this.overlay.getContainerElement().classList;
     containerClassList.remove(...this.themes);
     containerClassList.add(themeName);

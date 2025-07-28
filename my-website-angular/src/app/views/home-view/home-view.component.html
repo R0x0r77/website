@@ -1,0 +1,21 @@
+<article class="max-w-3xl mx-auto">
+  <div
+    class="w-full prose prose-base sm:prose-lg prose-azure dark:prose-invert mx-auto text-center"
+  >
+    <h1 class="mb-4! font-medium">Kamil Kosiorek</h1>
+    <hr class="w-40 mb-4! mt-0! mx-auto" />
+    <h3 class="mt-0! mb-12! font-medium">The Full Stack Journal</h3>
+  </div>
+  @for (article of articles(); track article.title) {
+  <div class="mb-12">
+    <app-blog-article-opener
+      [title]="article.title"
+      [date]="article.publishedDate.toString()"
+      [excerpt]="article.markdownContent.substring(0, 200)"
+      [tags]="article.tags"
+      [imageUrl]="`/assets/images/articles/${article.coverImageUrl}`"
+      [readMoreLink]="`/articles/${article.slug}`"
+    />
+  </div>
+  }
+</article>

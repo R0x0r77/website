@@ -1,0 +1,7 @@
+@if (article()) {
+<article
+  class="prose prose-sm sm:prose-base prose-azure dark:prose-invert max-w-3xl mx-auto"
+>
+  <markdown [data]="article()?.markdownContent"></markdown>
+</article>
+}

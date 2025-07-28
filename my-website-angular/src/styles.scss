@@ -1,4 +1,6 @@
 @use "tailwindcss";
+@plugin "@tailwindcss/typography";
+@config "../tailwind.config.ts";
 
 html,
 body {
@@ -31,4 +33,9 @@ body.magenta-violet {
       color: #ffabf3;
     }
   }
+}
+
+.prose code::before,
+.prose code::after {
+  content: none;
 }

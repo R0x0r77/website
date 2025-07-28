@@ -5,7 +5,6 @@ import {
   withMethods,
   patchState,
 } from '@ngrx/signals';
-import { computed } from '@angular/core';
 import Cookies from 'js-cookie';
 import User from '../app/data/user';
 
@@ -17,9 +16,7 @@ export const UserStore = signalStore(
     loggedIn: false,
   }),
 
-  withComputed((store) => ({
-    // isLoggedIn: computed(() => store.user() !== null),
-  })),
+  withComputed((store) => ({})),
 
   withMethods((store) => ({
     setUser(user: User) {

@@ -3,7 +3,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-import { ThemeService } from '../theme-switcher/theme.service';
+import { ThemeService } from './theme.service';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -27,6 +27,8 @@ export class DarkModeSwitcherComponent {
       this.themeService.setTheme(
         this.mode() === 'dark' ? 'magenta-violet' : 'azure-blue'
       );
+      if (this.mode() === 'dark') this.themeService.enableDarkMode();
+      else this.themeService.disableDarkMode();
     });
   }
 }

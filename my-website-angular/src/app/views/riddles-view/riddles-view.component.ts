@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RiddleCardComponent } from './components/riddle-card/riddle-card.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-riddles-view',
@@ -23,6 +24,7 @@ import { RiddleCardComponent } from './components/riddle-card/riddle-card.compon
     MatInputModule,
     MatButtonModule,
     RiddleCardComponent,
+    MatProgressBarModule,
   ],
   templateUrl: './riddles-view.component.html',
   styleUrl: './riddles-view.component.scss',
@@ -50,6 +52,14 @@ export class RiddlesViewComponent implements OnInit {
     return RiddlesViewComponent.riddleQuestions().find(
       (r) => r.levelReward - 1 === this.userStore.user()?.level
     );
+  });
+
+  progress = computed(() => {
+    if (this.currentRiddle()?.levelReward) {
+      const answered = this.currentRiddle()!.levelReward - 2;
+      return (answered / RiddlesViewComponent.riddleQuestions().length) * 100;
+    }
+    return 100;
   });
 
   loadRiddleQuestions() {
