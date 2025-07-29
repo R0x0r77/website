@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -41,6 +41,10 @@ export class RiddleCardComponent {
     private riddlesService: RiddlesService,
     private notificationService: NotificationService
   ) {}
+
+  allDone = computed(
+    () => this.userStore.user()?.level === this.userStore.MAX_LEVEL()
+  );
 
   onSubmitAnswer() {
     if (this.checkNuances()) return;

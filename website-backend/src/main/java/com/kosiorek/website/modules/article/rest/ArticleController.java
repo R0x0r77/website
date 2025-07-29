@@ -1,6 +1,7 @@
 package com.kosiorek.website.modules.article.rest;
 
 import com.kosiorek.website.modules.article.model.Article;
+import com.kosiorek.website.modules.article.model.dto.ArticlePreviewProjection;
 import com.kosiorek.website.modules.article.service.ArticleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +19,15 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
-    @GetMapping()
+    @GetMapping("/full-articles")
     public ResponseEntity<List<Article>> getAllArticles() {
         List<Article> res = this.articleService.findListSortedByDate();
+        return ResponseEntity.ok(res);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<ArticlePreviewProjection>> getAllArticlePreviews() {
+        List<ArticlePreviewProjection> res = this.articleService.findAllPreviewNative();
         return ResponseEntity.ok(res);
     }
 

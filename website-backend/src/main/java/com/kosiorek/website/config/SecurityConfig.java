@@ -14,6 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.List;
+
+
 
 @Configuration
 @EnableWebSecurity
@@ -24,6 +27,14 @@ public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
 
+    static final List<String> PUBLIC_URLS = List.of(
+            "/api/auth/**", "/error", "/api/*.html", "/*.html",
+            "/api/articles/**",
+            "/", "/index.html",
+            "/assets/**", "/assets/icons/*.svg", "/favicon.ico",
+            "/*.js", "/*.css", "/*.js", "/*.css", "/*.map",
+            "/home", "/articles", "/articles/**", "/about", "/cv", "/technologies", "/boardgames", "/riddles"
+    );
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -33,12 +44,7 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/auth/**", "/error", "/api/*.html", "/*.html",
-                                "/api/articles/**",
-                                "/", "/index.html",
-                                "/assets/**", "/assets/icons/*.svg", "/favicon.ico",
-                                "/*.js", "/*.css", "/*.js", "/*.css", "/*.map",
-                                "/home", "/articles", "/articles/**", "/about", "/cv", "/technologies", "/boardgames", "/riddles")
+                        .requestMatchers(PUBLIC_URLS.toArray(new String[0]))
                         .permitAll()
                         .anyRequest()
                         .authenticated()

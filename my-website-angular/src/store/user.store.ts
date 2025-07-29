@@ -14,6 +14,7 @@ export const UserStore = signalStore(
   withState({
     user: null as User | null,
     loggedIn: false,
+    MAX_LEVEL: 7,
   }),
 
   withComputed((store) => ({})),

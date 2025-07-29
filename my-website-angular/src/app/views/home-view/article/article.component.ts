@@ -3,10 +3,11 @@ import { MarkdownModule } from 'ngx-markdown';
 import { ArticleStore } from '../../../../store/article.store';
 import { ArticleService } from '../services/article.service';
 import { NotificationService } from '../../../shared/services/notification.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-article',
-  imports: [MarkdownModule],
+  imports: [MarkdownModule, MatProgressSpinnerModule],
   templateUrl: './article.component.html',
   styleUrl: './article.component.scss',
 })
@@ -24,10 +25,11 @@ export class ArticleComponent implements OnInit {
   );
 
   ngOnInit(): void {
-    if (this.articleStore.articles().length === 0)
+    if (!this.article()?.markdownContent) {
       this.articleService.getArticle(this.slug()).subscribe({
-        next: (res) => this.articleStore.setArticles([res]),
+        next: (res) => this.articleStore.updateArticle(res),
         error: (error) => this.notificationService.showError(error),
       });
+    }
   }
 }

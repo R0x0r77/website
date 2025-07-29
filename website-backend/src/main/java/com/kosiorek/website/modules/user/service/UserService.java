@@ -32,11 +32,19 @@ public class UserService {
     }
 
     private void validateUserInputs(User user) {
-        if (user.getUsername() == null || user.getUsername().trim().isEmpty()) {
+        String username = user.getUsername();
+        String email = user.getEmail();
+        if (username == null || username.trim().isEmpty()) {
             throw new InputMismatchException("Username can not be empty");
         }
-        if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
+        if (email == null || email.trim().isEmpty()) {
             throw new InputMismatchException("Email can not be empty");
+        }
+        if (username.length() > 30) {
+            throw new InputMismatchException("Username is too long. More than 30 characters");
+        }
+        if (email.length() > 254) {
+            throw new InputMismatchException("Email is too long");
         }
     }
 

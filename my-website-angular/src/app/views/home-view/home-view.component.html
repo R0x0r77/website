@@ -6,16 +6,21 @@
     <hr class="w-40 mb-4! mt-0! mx-auto" />
     <h3 class="mt-0! mb-12! font-medium">The Full Stack Journal</h3>
   </div>
-  @for (article of articles(); track article.title) {
-  <div class="mb-12">
-    <app-blog-article-opener
-      [title]="article.title"
-      [date]="article.publishedDate.toString()"
-      [excerpt]="article.markdownContent.substring(0, 200)"
-      [tags]="article.tags"
-      [imageUrl]="`/assets/images/articles/${article.coverImageUrl}`"
-      [readMoreLink]="`/articles/${article.slug}`"
-    />
-  </div>
+  @if (articlesLoading()) {
+  <mat-spinner class="mx-auto text-center"></mat-spinner>
   }
+  <div>
+    @for (article of articles(); track article.slug) {
+    <div class="mb-12">
+      <app-blog-article-opener
+        [title]="article.title"
+        [date]="article.publishedDate.toString()"
+        [excerpt]="article.contentPreview"
+        [tags]="article.tags"
+        [imageUrl]="`/assets/images/articles/${article.coverImageUrl}`"
+        [readMoreLink]="`/articles/${article.slug}`"
+      />
+    </div>
+    }
+  </div>
 </article>

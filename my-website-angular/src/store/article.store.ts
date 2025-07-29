@@ -15,6 +15,26 @@ export const ArticleStore = signalStore(
           articles: updatedArticles,
         });
       },
+      updateArticle(updatedArticle: Article) {
+        const currentArticles = store.articles();
+        let wasUpdated = false;
+
+        const updatedArticles = currentArticles.map((article) => {
+          if (article.slug === updatedArticle.slug) {
+            wasUpdated = true;
+            return updatedArticle;
+          }
+          return article;
+        });
+
+        const finalArticles = wasUpdated
+          ? updatedArticles
+          : [...currentArticles, updatedArticle];
+
+        patchState(store, {
+          articles: finalArticles,
+        });
+      },
     };
   })
 );

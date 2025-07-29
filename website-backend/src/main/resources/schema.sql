@@ -62,6 +62,9 @@ CREATE TABLE IF NOT EXISTS public.article
 
     TABLESPACE pg_default;
 
+ALTER TABLE public.article
+    ADD COLUMN content_preview VARCHAR(255) GENERATED ALWAYS AS (LEFT(markdown_content, 250)) STORED;
+
 ALTER TABLE IF EXISTS public.article
     OWNER to postgres;
 

@@ -29,11 +29,13 @@ public class Article {
     @Column(name = "tags")
     private List<String> tags;
 
-//    @Lob
     @Column(columnDefinition = "TEXT")
     private String markdownContent;
 
     private String coverImageUrl;
 
     private String slug;
+
+    @Column(insertable = false, updatable = false)
+    private String contentPreview;
 }

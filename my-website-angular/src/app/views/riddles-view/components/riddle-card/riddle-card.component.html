@@ -15,16 +15,16 @@
     <div class="flex justify-center mt-4 mb-4">
       <app-castle-riddle />
     </div>
+    } @else if (allDone()) {
+    <p>
+      Congratulations — all riddles lie defeated. But silence is fleeting...
+      more await in the shadows.
+    </p>
     } @if (currentRiddle()) {
     <mat-form-field class="w-full mt-2">
       <mat-label>Your Answer</mat-label>
       <input matInput [(ngModel)]="answer" (keydown.enter)="onSubmitAnswer()" />
     </mat-form-field>
-    } @else {
-    <p>
-      Congratulations — all riddles lie defeated. But silence is fleeting...
-      more await in the shadows.
-    </p>
     }
   </mat-card-content>
   @if (currentRiddle()) {

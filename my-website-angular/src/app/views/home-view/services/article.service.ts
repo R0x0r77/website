@@ -11,6 +11,7 @@ export interface Article {
   tags: string[];
   coverImageUrl: string;
   slug: string;
+  contentPreview: string;
 }
 
 @Injectable({
@@ -22,6 +23,10 @@ export class ArticleService {
   constructor(private http: HttpClient) {}
 
   getArticles(): Observable<Article[]> {
+    return this.http.get<Article[]>(`${this.apiUrl}articles/full-articles`);
+  }
+
+  getArticlePreviews(): Observable<Article[]> {
     return this.http.get<Article[]>(`${this.apiUrl}articles`);
   }
 

@@ -2,6 +2,7 @@ package com.kosiorek.website.modules.article.service;
 
 import com.kosiorek.website.modules.article.dao.ArticleRepository;
 import com.kosiorek.website.modules.article.model.Article;
+import com.kosiorek.website.modules.article.model.dto.ArticlePreviewProjection;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,11 @@ public class ArticleService {
     @Transactional
     public List<Article> findListSortedByDate() {
         return this.articleRepository.findAllByOrderByPublishedDateDesc();
+    }
+
+    @Transactional
+    public List<ArticlePreviewProjection> findAllPreviewNative() {
+        return this.articleRepository.findAllPreviewNative();
     }
 
     @Transactional
