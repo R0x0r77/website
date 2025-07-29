@@ -34,11 +34,11 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/**", "/error", "/api/*.html", "/*.html",
-                                "/api/articles", "/api/articles/**",
+                                "/api/articles/**",
                                 "/", "/index.html",
                                 "/assets/**", "/assets/icons/*.svg", "/favicon.ico",
                                 "/*.js", "/*.css", "/*.js", "/*.css", "/*.map",
-                                "/home", "/about", "/cv", "/technologies", "/boardgames", "/riddles")
+                                "/home", "/articles", "/articles/**", "/about", "/cv", "/technologies", "/boardgames", "/riddles")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
