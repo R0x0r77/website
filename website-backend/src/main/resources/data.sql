@@ -7,7 +7,7 @@ INSERT INTO riddle VALUES(4, 'snake', 'message', 'I walk the path with steady st
 INSERT INTO riddle VALUES(5, 'water-containers', 'ocean', 'Distribute the water so that 5L container and 8L container have 4L of water each and the 3L container is empty. Doing so you will receive the secret answer.', 3) ON CONFLICT DO NOTHING;
 INSERT INTO riddle VALUES(6, 'citadel', 'stronghold', 'Puzzle time! Order all elements correctly to receive the secret answer.', 7) ON CONFLICT DO NOTHING;
 
-INSERT INTO article VALUES(1, 'Ways to improve performance in JPA transactions', '2025-07-26 15:13:37.335085+02', '# Ways to improve performance in JPA transactions
+INSERT INTO article VALUES(1, 'Ways to Improve Performance in JPA Transactions', '2025-07-26 15:13:37.335085+02', '# Ways to Improve Performance in JPA Transactions
 
 Improving performance in JPA transactions involves strategically optimizing how data is fetched, persisted, and updated throughout the application''s lifecycle. Performance bottlenecks can arise from inefficient queries, excessive database access, suboptimal entity mappings, or poor resource management. It''s important to be mindful of these factors when working with JPA.
 

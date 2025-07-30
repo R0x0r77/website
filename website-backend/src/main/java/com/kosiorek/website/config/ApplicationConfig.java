@@ -35,7 +35,11 @@ public class ApplicationConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("http://localhost:5173", "http://localhost:4200");
+                        .allowedOrigins(
+                                "https://website-production-fa2a.up.railway.app",
+                                "http://localhost:5173",
+                                "http://localhost:4200")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
             }
         };
     }
