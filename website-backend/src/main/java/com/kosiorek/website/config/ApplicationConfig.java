@@ -37,6 +37,8 @@ public class ApplicationConfig {
                 registry.addMapping("/api/**")
                         .allowedOrigins(
                                 "https://website-production-fa2a.up.railway.app",
+                                "https://kamilkosiorek.com",
+                                "https://www.kamilkosiorek.com",
                                 "http://localhost:5173",
                                 "http://localhost:4200")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
