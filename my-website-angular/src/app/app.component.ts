@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { OpenClosePanelService } from './layout/side-navigation/open-close-panel.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CookieBannerComponent } from './shared/cookie-banner/cookie-banner.component';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     MatListModule,
     MatButtonModule,
     RouterOutlet,
+    CookieBannerComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

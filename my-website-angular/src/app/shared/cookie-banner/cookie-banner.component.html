@@ -1,0 +1,16 @@
+@if (showCookieBanner) {
+<div
+  class="fixed bottom-20 left-0 w-full bg-blue-800 text-white text-sm p-4 flex justify-between items-center opacity-95 z-50"
+>
+  <span class="max-w-[80%]">
+    This site uses cookies to provide essential features such as user login. By
+    continuing to browse, you consent to their use.
+  </span>
+  <button
+    class="ml-4 bg-white text-gray-800 font-semibold px-3 py-1 rounded hover:bg-gray-200 cursor-pointer"
+    (click)="dismissCookieBanner()"
+  >
+    Got it
+  </button>
+</div>
+}
