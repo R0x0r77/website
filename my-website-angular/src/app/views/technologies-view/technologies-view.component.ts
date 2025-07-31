@@ -74,7 +74,7 @@ export class TechnologiesViewComponent {
         'A platform for developing, shipping, and running applications in containers.',
     },
     {
-      name: 'Render',
+      name: 'Railway',
       description:
         'A cloud platform for deploying web applications and services.',
     },

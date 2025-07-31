@@ -1,13 +1,15 @@
-<article class="max-w-3xl mx-auto">
-  <div class="prose prose-base sm:prose-lg prose-azure dark:prose-invert">
-    <h1 class="font-medium">Riddles</h1>
-    <p>
-      Welcome to the Riddles section! Here you can test your wits and challenge
-      yourself with various riddles. Each riddle you solve will help you level
-      up your access for this site. Try to answer the riddles correctly to
-      progress through the levels.
-    </p>
-  </div>
+<article
+  class="prose prose-base sm:prose-lg prose-azure dark:prose-invert max-w-3xl mx-auto"
+>
+  <h1 class="font-medium text-center">Riddles</h1>
+  <p class="text-justify">
+    Welcome to the Riddles section! Here you can test your wits and challenge
+    yourself with various riddles. Each riddle you solve will help you level up
+    your access for this site. Try to answer the riddles correctly to progress
+    through the levels.
+  </p>
+</article>
+<div class="max-w-3xl mx-auto">
   @if (userStore.loggedIn()) {
   <mat-progress-bar
     mode="determinate"
@@ -25,4 +27,4 @@
     </mat-card-content>
   </mat-card>
   }
-</article>
+</div>

@@ -29,8 +29,7 @@ export const routes: Routes = [
   },
   {
     path: 'boardgames',
-    // component: BoardGamesViewComponent,
-    component: NotFoundComponent,
+    component: BoardGamesViewComponent,
   },
   {
     path: 'riddles',

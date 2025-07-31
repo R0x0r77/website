@@ -1,4 +1,5 @@
 @use "tailwindcss";
+@use "./styles/material-themes/mat-theme-base.css";
 @plugin "@tailwindcss/typography";
 @config "../tailwind.config.ts";
 
