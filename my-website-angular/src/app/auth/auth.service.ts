@@ -48,7 +48,7 @@ export class AuthService {
       .post<AuthenticationResponse>(`${this.apiUrl}auth/authenticate`, request)
       .pipe(
         tap((res) => {
-          Cookies.set('authToken', res.token, { expires: 1 });
+          Cookies.set('authToken', res.token, { expires: 7 });
           this.getUserData(request.username).subscribe();
         })
       );
@@ -70,7 +70,7 @@ export class AuthService {
       .put<AuthenticationResponse>(`${this.apiUrl}users/${user.userId}`, user)
       .pipe(
         tap((res) => {
-          Cookies.set('authToken', res.token, { expires: 1 });
+          Cookies.set('authToken', res.token, { expires: 7 });
           this.getUserData(user.username).subscribe();
         })
       );

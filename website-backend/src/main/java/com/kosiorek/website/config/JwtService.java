@@ -16,7 +16,7 @@ public class JwtService {
 
     private static final SecretKey SECRET_KEY = Jwts.SIG.HS256.key().build();
 
-    private static final Integer TOKEN_VALIDITY = 86400000;
+    private static final Integer TOKEN_VALIDITY = 604_800_000; // 7 days
 
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
