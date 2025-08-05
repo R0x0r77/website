@@ -16,6 +16,7 @@ import { UserStore } from '../../../store/user.store';
 import { AuthService, UserUpdateDto } from '../auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-user-settings',
@@ -39,7 +40,8 @@ export class UserSettingsComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<UserSettingsComponent>,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private notificationService: NotificationService
   ) {}
 
   userId = signal(this.userStore.user()?.userId);
@@ -56,22 +58,6 @@ export class UserSettingsComponent implements OnInit {
     return this.level()! < 10 ? `counter_${this.level()}` : 'workspace_premium';
   });
 
-  showError(error: Error) {
-    this.snackBar.open('Error: ' + error.message, 'OK', {
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      duration: 15000,
-    });
-  }
-
-  showSuccess(message: string) {
-    this.snackBar.open(message, 'OK', {
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      duration: 5000,
-    });
-  }
-
   onSubmit() {
     const user: UserUpdateDto = {
       userId: this.userId()!,
@@ -83,11 +69,11 @@ export class UserSettingsComponent implements OnInit {
 
     this.authService.modify(user).subscribe({
       next: () => {
-        this.showSuccess('Data updated successfully');
+        this.notificationService.showSuccess('Data updated successfully');
         this.dialogRef.close();
       },
       error: (error) => {
-        this.showError(error);
+        this.notificationService.showError(error);
       },
     });
   }

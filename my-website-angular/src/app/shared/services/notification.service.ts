@@ -10,7 +10,7 @@ export class NotificationService {
 
   showError(error: HttpErrorResponse, duration: number = 15000) {
     this.snackBar.open(
-      'Error: ' + error.error?.errorMessage || error.message,
+      'Error: ' + error.error?.message || error.message,
       'OK',
       {
         horizontalPosition: 'center',

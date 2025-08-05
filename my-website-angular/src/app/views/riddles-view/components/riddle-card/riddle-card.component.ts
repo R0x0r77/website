@@ -56,7 +56,7 @@ export class RiddleCardComponent {
     this.riddlesService.levelUp(levelUpDto).subscribe({
       next: (res) => {
         this.notificationService.showSuccess('Your answer is correct!');
-        this.userStore.levelUp(res.response);
+        this.userStore.levelUp(res);
         this.answer.set('');
       },
       error: (error) => {

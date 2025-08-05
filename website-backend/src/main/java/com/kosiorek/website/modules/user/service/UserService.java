@@ -1,14 +1,12 @@
 package com.kosiorek.website.modules.user.service;
 
-import com.kosiorek.website.exceptions.UserAlreadyExistsException;
+import com.kosiorek.website.exceptions.custom_exceptions.UserAlreadyExistsException;
 import com.kosiorek.website.modules.riddle.dao.RiddleRepository;
 import com.kosiorek.website.modules.riddle.model.Riddle;
 import com.kosiorek.website.modules.user.dao.UserRepository;
 import com.kosiorek.website.modules.user.model.User;
 import com.kosiorek.website.modules.user.model.dto.LevelUpDto;
 import jakarta.transaction.Transactional;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

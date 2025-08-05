@@ -2,7 +2,7 @@ package com.kosiorek.website.modules.auth.service;
 
 import com.kosiorek.website.config.JwtService;
 import com.kosiorek.website.enums.Role;
-import com.kosiorek.website.exceptions.UserAlreadyExistsException;
+import com.kosiorek.website.exceptions.custom_exceptions.UserAlreadyExistsException;
 import com.kosiorek.website.modules.auth.model.AuthenticationRequest;
 import com.kosiorek.website.modules.auth.model.AuthenticationResponse;
 import com.kosiorek.website.modules.auth.model.RegisterRequest;

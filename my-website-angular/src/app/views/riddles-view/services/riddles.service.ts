@@ -16,11 +16,6 @@ export interface RiddleQuestion {
   levelReward: number;
 }
 
-export interface NumberResponse {
-  response: number;
-  errorMessage?: string;
-}
-
 @Injectable({
   providedIn: 'root',
 })
@@ -34,15 +29,15 @@ export class RiddlesService {
     return this.http.get<RiddleQuestion[]>(`${this.apiUrl}riddles/questions`);
   }
 
-  levelUp(dto: LevelUpDto): Observable<NumberResponse> {
+  levelUp(dto: LevelUpDto): Observable<number> {
     return this.http
-      .post<NumberResponse>(
+      .post<number>(
         `${this.apiUrl}users/${this.userStore.user()?.userId}/levelup`,
         dto
       )
       .pipe(
         tap((res) => {
-          this.userStore.levelUp(res.response);
+          this.userStore.levelUp(res);
         })
       );
   }

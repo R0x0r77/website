@@ -1,4 +1,4 @@
-package com.kosiorek.website.exceptions;
+package com.kosiorek.website.exceptions.custom_exceptions;
 
 public class UserAlreadyExistsException
         extends RuntimeException {
