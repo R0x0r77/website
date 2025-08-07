@@ -70,6 +70,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => this.menuButton().nativeElement.click(), 1000);
+    setTimeout(() => this.menuButton().nativeElement.click(), 500);
   }
 }
