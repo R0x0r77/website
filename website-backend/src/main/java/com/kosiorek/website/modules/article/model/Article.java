@@ -18,7 +18,6 @@ import java.util.List;
 public class Article {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer articleId;
 
     private String title;
