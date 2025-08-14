@@ -1,0 +1,118 @@
+<div class="flex justify-center items-center">
+  <div
+    class="relative p-6 flex max-md:flex-col min-w-188 max-md:min-w-100 w-220 h-120 max-md:h-auto bg-[#fffdf5] dark:bg-[#1f1f1f] border-2 border-[#d8cbb7] dark:border-[#4a4a4a] rounded-xl overflow-hidden"
+  >
+    <!-- Stamp -->
+    <div
+      class="absolute flex text-4xl items-center justify-center top-6 right-6 md:top-8 md:right-8 w-16 h-16 dark:bg-[#5a4630] border-[#c49b63] dark:border-[#a67c52] rotate-[4deg] select-none"
+    >
+      <app-post-stamp-svg />
+    </div>
+
+    <!-- Left side: text -->
+    <div
+      class="flex-none w-4/11 max-md:w-full mr-6 max-md:mb-8 md:border-r-4 border-double border-[#d8cbb7] dark:border-[#4a4a4a] pr-6 max-md:pr-0"
+    >
+      <h2 class="text-[2.3rem] mb-8 text-[#3b3b3b] dark:text-[#f0f0f0]">
+        CONTACT ME
+      </h2>
+      <div
+        class="text-lg text-justify leading-[1.5] text-[#3b3b3b] dark:text-[#d1d1d1]"
+      >
+        <p class="mb-2">
+          If you'd like to reach out regarding projects, job opportunities, or
+          just to say hi, please fill out the form. I'll get back to you
+          shortly!
+        </p>
+        <p class="mb-2">
+          If you prefer to contact me directly, there's my Email:
+        </p>
+        <p>
+          <a
+            href="mailto:kosiorek.kamil90@gmail.com"
+            class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 underline transition-colors duration-200"
+          >
+            kosiorek.kamil90&#64;gmail.com
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Right side: form -->
+    <div
+      class="flex flex-col w-7/11 max-md:w-full bg-[repeating-linear-gradient(to_bottom,#fffdf5,#fffdf5_37px,#f8f4ea_37px,#f8f4ea_38px)] dark:bg-[repeating-linear-gradient(to_bottom,#1f1f1f,#1f1f1f_37px,#2a2a2a_37px,#2a2a2a_38px)]"
+    >
+      <!-- name -->
+      <mat-form-field appearance="outline" class="w-full md:max-w-72 mb-4">
+        <mat-label>Your Name</mat-label>
+        <input
+          matInput
+          [formControl]="nameFormControl"
+          autocomplete="given-name"
+        />
+        @if (nameFormControl.hasError('required')) {
+        <mat-error>Username is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <!-- email -->
+      <mat-form-field appearance="outline" class="w-full md:max-w-72 mb-4">
+        <mat-label>Your Email</mat-label>
+        <input
+          type="email"
+          matInput
+          [formControl]="emailFormControl"
+          [errorStateMatcher]="matcher"
+          placeholder="Ex. pat@example.com"
+          autocomplete="email"
+        />
+        @if (emailFormControl.hasError('email') &&
+        !emailFormControl.hasError('required')) {
+        <mat-error>Please enter a valid email address</mat-error>
+        } @if (emailFormControl.hasError('required')) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <!-- message -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Your Message</mat-label>
+        <textarea
+          matInput
+          rows="6"
+          [formControl]="messageFormControl"
+          [errorStateMatcher]="matcher"
+          class="resize-none!"
+        ></textarea>
+        @if (messageFormControl.hasError('required')) {
+        <mat-error>Username is <strong>required</strong></mat-error>
+        } @else if (messageFormControl.hasError('minLength')) {
+        <mat-error>
+          Message must be at least
+          {{ messageFormControl.errors?.['minlength']?.requiredLength }}
+          characters long
+        </mat-error>
+        } @else if (messageFormControl.hasError('maxLength')) {
+        <mat-error>
+          Message must be at most
+          {{ messageFormControl.errors?.['maxlength']?.requiredLength }}
+          characters long
+        </mat-error>
+        }
+      </mat-form-field>
+      @if (sending) {
+      <button mat-stroked-button class="self-end w-full md:w-40">
+        <mat-spinner diameter="20" class="mx-auto text-center"></mat-spinner>
+      </button>
+      } @else {
+      <button
+        mat-stroked-button
+        class="self-end w-full md:w-40"
+        (click)="sendMessage()"
+      >
+        Send
+      </button>
+      }
+    </div>
+  </div>
+</div>

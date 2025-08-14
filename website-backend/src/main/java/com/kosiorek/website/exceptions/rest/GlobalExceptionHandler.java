@@ -3,9 +3,11 @@ package com.kosiorek.website.exceptions.rest;
 import com.kosiorek.website.exceptions.custom_exceptions.UserAlreadyExistsException;
 import com.kosiorek.website.exceptions.response.ErrorResponse;
 import jakarta.servlet.ServletException;
+import jakarta.validation.ConstraintViolationException;
 import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.support.MethodArgumentNotValidException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -68,6 +70,28 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<ErrorResponse> handleUserAlreadyExists(UserAlreadyExistsException ex) {
         return buildErrorResponse(ex, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
+        return buildErrorResponse(ex, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> handleConstraintViolation(ConstraintViolationException ex) {
+        String propertyPath = ex.getConstraintViolations()
+                .stream()
+                .findFirst()
+                .map(v -> v.getPropertyPath().toString())
+                .orElse("unknown");
+
+        ErrorResponse error = new ErrorResponse(
+                ex.getClass().getSimpleName(),
+                "Validation error: " + propertyPath,
+                HttpStatus.BAD_REQUEST.value()
+        );
+
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)

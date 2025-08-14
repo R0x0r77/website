@@ -40,3 +40,7 @@ body.magenta-violet {
 .prose code::after {
   content: none;
 }
+
+.mdc-notched-outline__notch {
+  border-right: none;
+}

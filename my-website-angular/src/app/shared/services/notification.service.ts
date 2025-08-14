@@ -27,4 +27,12 @@ export class NotificationService {
       duration: duration,
     });
   }
+
+  showInfo(message: string, duration: number = 5000) {
+    this.snackBar.open(message, 'OK', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: duration,
+    });
+  }
 }

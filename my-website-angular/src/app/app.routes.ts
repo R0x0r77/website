@@ -7,6 +7,7 @@ import { TechnologiesViewComponent } from './views/technologies-view/technologie
 import { BoardGamesViewComponent } from './views/board-games-view/board-games-view.component';
 import { RiddlesViewComponent } from './views/riddles-view/riddles-view.component';
 import { ArticleComponent } from './views/home-view/article/article.component';
+import { ContactViewComponent } from './views/contact-view/contact-view.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'articles', pathMatch: 'full' },
@@ -38,6 +39,10 @@ export const routes: Routes = [
   {
     path: 'technologies',
     component: TechnologiesViewComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactViewComponent,
   },
   {
     path: '**',

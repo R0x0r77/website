@@ -29,7 +29,7 @@ public class SecurityConfig {
 
     static final List<String> PUBLIC_URLS = List.of(
             "/api/auth/**", "/error", "/api/*.html", "/*.html",
-            "/api/articles/**", "/api/ping",
+            "/api/articles/**", "/api/ping", "/api/emails",
             "/", "/index.html",
             "/assets/**", "/assets/icons/*.svg", "/favicon.ico",
             "/*.js", "/*.css", "/*.js", "/*.css", "/*.map",

@@ -2,6 +2,7 @@ package com.kosiorek.website.modules.user.model;
 
 import com.kosiorek.website.enums.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +34,7 @@ public class User implements UserDetails {
 
     private String lastName;
 
+    @Email(message = "Invalid email format")
     private String email;
 
     private String password;
