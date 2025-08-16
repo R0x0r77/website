@@ -3,11 +3,19 @@ import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
+import { MatChipSet, MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-blog-article-opener',
   standalone: true,
-  imports: [MatButtonModule, DatePipe, MarkdownModule, RouterLink],
+  imports: [
+    MatButtonModule,
+    DatePipe,
+    MarkdownModule,
+    RouterLink,
+    MatChipSet,
+    MatChipsModule,
+  ],
   templateUrl: './blog-article-opener.component.html',
 })
 export class BlogArticleOpenerComponent {
