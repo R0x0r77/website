@@ -8,6 +8,7 @@ import { BoardGamesViewComponent } from './views/board-games-view/board-games-vi
 import { RiddlesViewComponent } from './views/riddles-view/riddles-view.component';
 import { ArticleComponent } from './views/home-view/article/article.component';
 import { ContactViewComponent } from './views/contact-view/contact-view.component';
+import { SkillsViewComponent } from './views/skills-view/skills-view.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'articles', pathMatch: 'full' },
@@ -43,6 +44,10 @@ export const routes: Routes = [
   {
     path: 'contact',
     component: ContactViewComponent,
+  },
+  {
+    path: 'skills',
+    component: SkillsViewComponent,
   },
   {
     path: '**',

@@ -1,0 +1,38 @@
+.turntable {
+  width: 500px;
+  background-image: url("/assets/images/turntable-1.webp");
+  background-size: cover;
+  background-position: center;
+}
+
+.stage {
+  transform: translateX(-12px) translateY(-30px) scale(1);
+}
+
+.dot {
+  fill: #fff;
+  stroke: #222;
+  stroke-width: 0.6;
+  transition: transform 0.15s, fill 0.15s;
+}
+
+.dot.hovered {
+  fill: #f48fb1;
+}
+
+.tooltip {
+  font-size: 6px;
+  fill: #90caf9;
+  user-select: none;
+}
+
+.tooltip .tip-bg {
+  fill: #111;
+  opacity: 0.9;
+  stroke: #fff;
+  stroke-width: 0.4;
+}
+
+.tooltip.hovered {
+  fill: #f48fb1;
+}

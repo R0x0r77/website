@@ -7,8 +7,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { OpenClosePanelService } from './open-close-panel.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+interface SideNavigationItem {
+  label: string;
+  icon: string;
+  route: string;
+}
 @Component({
   selector: 'app-side-navigation',
   imports: [
@@ -23,6 +27,17 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './side-navigation.component.scss',
 })
 export class SideNavigationComponent {
+  items: SideNavigationItem[] = [
+    { label: 'Home', icon: 'home', route: '/' },
+    { label: 'About', icon: 'contact_page', route: '/about' },
+    { label: 'Skills', icon: 'fitness_center', route: '/skills' },
+    { label: 'CV', icon: 'assignment', route: '/cv' },
+    { label: 'Technologies', icon: 'desktop_windows', route: '/technologies' },
+    { label: 'Board Games', icon: 'rocket', route: '/boardgames' },
+    { label: 'Riddles', icon: 'psychology_alt', route: '/riddles' },
+    { label: 'Contact', icon: 'mail', route: '/contact' },
+  ];
+
   constructor(private openClosePanelService: OpenClosePanelService) {}
 
   isSmallScreen(): boolean {

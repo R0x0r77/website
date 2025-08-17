@@ -1,0 +1,50 @@
+<div class="clock-wrap mx-auto">
+  <!-- Background image (clock face) -->
+  <img
+    class="face dark:brightness-0 dark:saturate-[100%] dark:invert"
+    src="/assets/images/clock.webp"
+    alt="Clock face"
+  />
+
+  <!-- Overlay SVG; centered on the face -->
+  <svg class="overlay" viewBox="-100 -100 200 200" aria-label="Clock hands">
+    <!-- Center pivot disc -->
+    <circle
+      cx="0"
+      cy="0"
+      r="3.5"
+      fill="#111"
+      stroke="#fff"
+      stroke-width="0.8"
+    />
+
+    <!-- Hands -->
+    @for (hand of hands; track hand) {
+    <!-- Hand line -->
+    <line
+      x1="0"
+      y1="0"
+      [attr.x2]="endX(hand)"
+      [attr.y2]="endY(hand)"
+      [attr.stroke]="hand.color"
+      [attr.stroke-width]="hand.width"
+      stroke-linecap="round"
+    />
+
+    <!-- Tip dot with hover -->
+    <g (mouseenter)="onTipEnter(hand)" (mouseleave)="onTipLeave(hand)">
+      <!-- Tooltip -->
+      <g
+        class="tooltip"
+        [attr.fill]="hand.textColor"
+        [attr.transform]="
+          'translate(' + (endX(hand) + 6) + ',' + (endY(hand) - 6) + ')'
+        "
+      >
+        <rect class="tip-bg" rx="3" ry="3" />
+        <text class="tip-text">{{ hand.label }}</text>
+      </g>
+    </g>
+    }
+  </svg>
+</div>

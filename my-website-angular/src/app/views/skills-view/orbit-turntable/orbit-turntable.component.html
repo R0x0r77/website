@@ -1,0 +1,53 @@
+<div class="turntable mx-auto">
+  <svg viewBox="-100 -65 200 130" class="stage">
+    <!-- Rings -->
+    @for (ring of rings; track ring; let i = $index) {
+
+    <!-- Orbit ellipse -->
+    <ellipse
+      class="orbit"
+      [attr.rx]="ring.radius"
+      [attr.ry]="ring.radius * ring.tilt"
+      [attr.cx]="ring.cx || 0"
+      [attr.cy]="ring.cy || 0"
+      [attr.stroke]="ring.stroke || defaultRingColor"
+      fill="none"
+    />
+
+    <!-- Points -->
+    @for (p of ring.points; track p.id ?? p.label ?? $index) {
+    <g
+      class="point"
+      (mouseenter)="onPointEnter(p)"
+      (mouseleave)="onPointLeave(p)"
+    >
+      <!-- Dot -->
+      <ellipse
+        [attr.rx]="ring.dotRadius || 2.5"
+        [attr.ry]="(ring.dotRadius || 2.5) * ring.tilt"
+        [attr.cx]="ring.cx + ring.radius * cos(p.angle)"
+        [attr.cy]="ring.cy + ring.radius * ring.tilt * sin(p.angle)"
+        [class.hovered]="p.hovered"
+        class="dot"
+      />
+
+      <!-- Tooltip -->
+      <g
+        class="tooltip"
+        [class.visible]="p.hovered"
+        [class.hovered]="p.hovered"
+        [attr.transform]="
+          'translate(' +
+          (ring.radius * cos(p.angle) + 6) +
+          ',' +
+          (ring.radius * ring.tilt * sin(p.angle) - 6) +
+          ')'
+        "
+      >
+        <rect rx="3" ry="3" class="tip-bg" />
+        <text class="tip-text">{{ p.label }}</text>
+      </g>
+    </g>
+    } }
+  </svg>
+</div>
