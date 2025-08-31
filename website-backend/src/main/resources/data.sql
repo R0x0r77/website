@@ -636,4 +636,90 @@ SignalStore also supports lifecycle logic through withHooks, allowing you to run
 
 To sum up, SignalStore makes state management in Angular clean, reactive, and highly modular. In my opinion, signals are an elegant foundation for modern Angular applications — and NgRx SignalStore builds on them beautifully.', 'ngrx_signalstore_made_easy.jpg', 'ngrx-signalstore-made-easy') ON CONFLICT DO NOTHING;
 
-INSERT INTO article_tags VALUES (1, 'java'), (1, 'spring'), (1, 'jpa'), (1, 'backend'), (2, 'angular'), (2, 'frontend') ON CONFLICT DO NOTHING;
+INSERT INTO article VALUES(3, 'Spring AOP – Quick Refresher', '2025-08-31 21:40:15.378945+02', '# Spring AOP – Quick Refresher
+
+Spring AOP (Aspect-Oriented Programming) is a framework that complements the Spring IoC and OOP in general by providing the modularization of cross-cutting concerns like: logging, transaction management (check out @Transactional), security (@Secured), caching (@Cacheable), performance monitoring, exception handling, auditing, validation, etc.
+
+## Key Concepts in Spring AOP
+
+1. Aspect – A module that encapsulates a cross-cutting concern (@Aspect annotation on a component).
+
+2. Join point – A specific point in program execution where an aspect can be applied (a method execution).
+
+3. Advice – Action taken by an aspect at a particular join point (an aspect method that is being triggered). Types of advice:
+   - @Before → Runs before method execution.
+   - @After → Runs after method execution (regardless of outcome).
+   - @AfterReturning → Runs only if method returns normally.
+   - @AfterThrowing → Runs if method throws an exception.
+   - @Around → Runs before and after method execution (most powerful; can modify return values or suppress execution).
+
+4. Pointcut – A predicate (expression) that matches join points. Example:
+   execution(* com.example.service.*.*(..)) → applies to all methods in the service package.
+
+5. Target object – The actual object whose method is being advised (proxied), also called the proxied object.
+
+6. Proxy – A dynamically created object that wraps the target object and ensures advice is executed when methods are called.
+
+7. Weaving – The process of applying aspects to the target objects. In Spring AOP, weaving is done at runtime.
+
+
+## Example
+
+```java
+@Aspect
+@Component
+public class ExampleAspect {
+
+    @Before("execution(* com.kamil.learning.service.*(..))")
+    public void logBefore(JoinPoint joinPoint) {
+        System.out.println("Calling: " + joinPoint.getSignature());
+    }
+
+    @AfterReturning(
+        pointcut = "execution(* com.kamil.learning.service.*(..))",
+        returning = "result")
+    public void logAfterReturning(JoinPoint joinPoint, Object result) {
+        System.out.println("Method " + joinPoint.getSignature() + " returned: " + result);
+    }
+
+    @Around("execution(* com.kamil.learning.service.*(..))")
+    public Object measureExecutionTime(org.aspectj.lang.ProceedingJoinPoint joinPoint) throws Throwable {
+        long start = System.currentTimeMillis();
+        Object result = joinPoint.proceed();
+        long executionTime = System.currentTimeMillis() - start;
+        System.out.println("Method " + joinPoint.getSignature().getName() + " executed in " + executionTime + "ms");
+        return result;
+    }
+}
+```
+
+## Explanation in terms of AOP concepts
+
+1.  Aspect – the ExampleAspect class annotated by @Aspect and @Component.
+
+2.  Join point – This parameter gives runtime metadata about the method being called.
+    You can inspect:
+
+    -   joinPoint.getSignature() → method signature (name, params, return type).
+
+    -   joinPoint.getArgs() → actual arguments passed.
+
+    -   joinPoint.getTarget() → the target object (the proxied service).
+
+3.  Advice – the aspect method that will run, for example before (on @Before type) some com.kamil.learning.service.* bean method.
+
+4.  Pointcut – execution(* com.kamil.learning.service.*(..))
+
+    -   \*   → Match any return type.
+
+    -   com.kamil.learning.service.* → Match any class inside that package.
+
+    -   (..) → Match any number of method arguments (zero or more).
+
+5.  Target object – an actual bean inside the Spring container instantiated from some class inside com.kamil.learning.service package, for example some UserService class.
+
+6.  Proxy – a wrapper object that Spring creates around the target object (UserService). When you call userService.saveUser("John"), you are really calling the proxy. The proxy decides whether to run any advices, and then it delegates to the target object (UserService).
+
+7.  Weaving – process of proxying done at runtime.', 'spring_aop_quick_refresher.jpg', 'spring-aop-quick-refresher') ON CONFLICT DO NOTHING;
+
+INSERT INTO article_tags VALUES (1, 'java'), (1, 'spring'), (1, 'jpa'), (1, 'backend'), (2, 'angular'), (2, 'frontend'), (3, 'java'), (3, 'spring'), (3, 'backend') ON CONFLICT DO NOTHING;

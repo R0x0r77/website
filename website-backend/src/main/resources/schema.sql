@@ -79,8 +79,6 @@ CREATE TABLE IF NOT EXISTS public.article_tags
     tags character varying(255) COLLATE pg_catalog."default",
     CONSTRAINT fk7ca4g2ftit1urmwivh06yqvjd FOREIGN KEY (article_article_id)
     REFERENCES public.article (article_id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
     )
 
     TABLESPACE pg_default;
