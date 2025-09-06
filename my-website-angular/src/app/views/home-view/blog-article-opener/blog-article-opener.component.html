@@ -1,19 +1,19 @@
 <div
-  class="p-6 rounded-xl bg-surface-container shadow-md min-w-52 max-w-2xl bg-[#d7e3ff] dark:bg-purple-900 mx-auto"
+  class="p-6 rounded-xl shadow-md min-w-52 max-w-2xl bg-[#d7e3ff] dark:bg-purple-900 mx-auto"
 >
   <h2
     [routerLink]="readMoreLink"
-    class="text-2xl font-bold text-on-surface mb-1 cursor-pointer"
+    class="text-2xl font-bold mb-1 cursor-pointer"
   >
     {{ title }}
   </h2>
-  <p class="text-md font-light text-on-surface-variant mb-4">
+  <p class="text-md font-light mb-4">
     {{ date | date : "dd-MM-yyyy" }}
   </p>
 
   <div class="flex flex-col-reverse sm:flex-row gap-6">
     <div class="flex-1">
-      <p class="text-base text-on-surface mb-2 line-clamp-4">
+      <p class="text-base mb-2 line-clamp-4">
         <markdown>{{ excerpt }}...</markdown>
       </p>
 
@@ -29,13 +29,11 @@
     </div>
 
     @if (imageUrl) {
-    <div
-      class="max-w-48 md:w-48 max-h-48 md:h-auto overflow-hidden rounded-lg shadow-md"
-    >
+    <div class="w-48 h-48 shadow-md">
       <img
         [src]="imageUrl"
-        alt="Blog image"
-        class="w-full h-full object-cover cursor-pointer"
+        alt="blog image"
+        class="w-full h-full cursor-pointer rounded-md"
         [routerLink]="readMoreLink"
       />
     </div>

@@ -33,7 +33,8 @@ public class SecurityConfig {
             "/", "/index.html",
             "/assets/**", "/assets/icons/*.svg", "/favicon.ico",
             "/*.js", "/*.css", "/*.js", "/*.css", "/*.map",
-            "/home", "/articles", "/articles/**", "/about", "/cv", "/technologies", "/boardgames", "/riddles"
+            "/home", "/articles", "/articles/**", "/about", "/cv", "/technologies",
+            "/boardgames", "/riddles","/skills", "/contact"
     );
 
     @Bean

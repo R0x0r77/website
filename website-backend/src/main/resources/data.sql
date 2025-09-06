@@ -475,8 +475,6 @@ export const initialMovieState: MovieSlice = {
   favoriteList: [],
 };
 
-export type PersistedShopSlice = Pick<MovieSlice, ''favoriteList''>;
-
 ```
 
 ----------
@@ -683,11 +681,14 @@ public class ExampleAspect {
     }
 
     @Around("execution(* com.kamil.learning.service.*(..))")
-    public Object measureExecutionTime(org.aspectj.lang.ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object measureExecutionTime(
+        org.aspectj.lang.ProceedingJoinPoint joinPoint
+    ) throws Throwable {
         long start = System.currentTimeMillis();
         Object result = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
-        System.out.println("Method " + joinPoint.getSignature().getName() + " executed in " + executionTime + "ms");
+        System.out.println("Method " + joinPoint.getSignature().getName()
+                + " executed in " + executionTime + "ms");
         return result;
     }
 }
